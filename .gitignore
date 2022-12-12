@@ -1,0 +1,6 @@
+processed_stations/*
+processed_trip_data/*
+station_data/*
+station_data_original/*
+taxi_trip_raw_data/*
+visualization_files/*
