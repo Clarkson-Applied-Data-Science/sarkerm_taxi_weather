@@ -2,11 +2,13 @@
 
 
 # Introduction
-My plan is to see the impact of weather conditions on taxi travel in New York City. For that, I have collected the New York Green taxi data for the year 2015 from the NYC Open Data website (https://opendata.cityofnewyork.us/ ). And I scraped the Weather Underground Website's (https://www.wunderground.com)  hourly data of 28 private and public weather stations data. And analyzed to overview the weather effect on Green Taxi travel. My target was to match the latitude, and longitude of travel data with weather station data to get the closest weather station, then get the weather information from the weather station data depending on the date and time. Then work on visualization. The target comparison I wanted to make is 
+My plan is to see the impact of weather conditions on taxi travel in New York City. For that, I have collected the New York Green taxi data for the year 2015 from the NYC Open Data website (https://opendata.cityofnewyork.us/ ). And I scraped the Weather Underground Website's (https://www.wunderground.com)  hourly data of 28 private and public weather stations data. And analyzed to overview the weather effect on Green Taxi travel. My target was to match the latitude, and longitude of travel data with weather station data to get the closest weather station, then get the weather information from the weather station data depending on the date and time. Then work on visualization. The target is to 
 
-1. weather effect on travel count, Which weather people travel most or least
-2. Weather effect on cost
-3. which weather people travel long distance.
+1. Collect dataset and preprocess
+2. Impact of weather condition on taxi travel (travel distance, tip, passenger count)
+3. Which weather people travel long distance.
+4. Temperatue effect on taxi travel
+5. Effect of Humidity on taxi travel
 
 
  
@@ -82,14 +84,15 @@ The data I got here contains some letters, later I remove those in the pre-proce
 
 
 # Data preprocessing:
-I have created the script “pre_processing.ipynb” to preprocess all the data. Webscrped raw data contains 12HR data format, I converted that to 24HR data so that it matches with Taxi data. Then removed all unnecessary text from the data and saved it in the “processed_stations” folder.
+I have created the script “pre_processing.ipynb” to preprocess all the data. Webscrped raw data contains 12hr data format, I converted that to 24hr data so that it matches with Taxi data. Then removed all unnecessary text from the data and saved it in the “processed_stations” folder.
 
 For preprocessing taxi raw data. First compared latitude and longitude with station data and get the closest station data and removed the row where latitude or longitude is missing. Then saved the processed data.
 
 
 
 
-# Data analyze
+# Data analysis
+I tried to minimize the analyze time so that most of the task is done on pre-processing statage. And tried to do all calculation in a single run. 
 
 ```python
 w_condition_vs_trip_distance = {}
@@ -204,7 +207,7 @@ with open("processed_trip_data/green_taxi_processed_2015.csv", 'r',) as file:
 
 ### Data distribution
 
-At first, I wanted to see the data distributions. here I can see Cloudy weather is 23%, which is the highest. I put the least significant distribution to the others category, which is a total of 9%. The dataset shows some bias which is the nature of the weather.
+At first, I wanted to see the data distributions. here I can see Cloudy weather is 25.4%, which is the highest. To make the visualization meaninful,I put the least significant distribution to the others category, which is a total of 7.4%. The dataset shows some bias which is the nature of the weather.
 
     
 ![png](analyze_files/analyze_5_0.png)
@@ -250,6 +253,7 @@ plot_bar_chart(list(w_condition_vs_fare_rate.keys()) ,list(w_condition_vs_fare_r
 
 
 ### Effect of temperature on trip
+Analysis show that on 55-59(F) and 72-75(F) temperature people of New York use taxi more than other times.
 
 ```python
 temperature_vs_trip_distance_sort = sorted(temperature_vs_trip_distance.items(), key=lambda t: get_key(t[0]))
@@ -285,6 +289,7 @@ plot_line_graph(temperature_vs_tip_amount_x,temperature_vs_tip_amount_y,"tempera
 
 
 ### Effect of humidity on trip
+The data shows that on humidity level 45%-70% people of New York use more green taxi then other times
 
 ```python
 humidity_vs_trip_distance_short = sorted(humidity_vs_trip_distance.items(), key=lambda t: get_key(t[0]))
@@ -320,6 +325,11 @@ plot_line_graph(humidity_vs_tip_amount_x,humidity_vs_tip_amount_y,"humidity",'ti
     
 ![png](analyze_files/analyze_9_2.png)
 
+
+
+# Conclusion
+
+We can see the is a good effect of weather on taxi trips. Although data scraping for weather and preprocessing was time-consuming but the analyze show promising results.   I believe the process I have developed and  data I have collected, will help future data analysts in many ways while working on weather effect analysis.
 
 
 
