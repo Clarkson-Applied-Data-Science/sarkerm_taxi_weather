@@ -1,4 +1,4 @@
-#Impact of weather condition on taxi travel
+# Impact of weather condition on taxi travel
 My plan is to see the impact of weather conditions on taxi travel in New York City. For that, I have collected the New York Green taxi data for the year 2015 from the NYC Open Data website (https://opendata.cityofnewyork.us/ ). And I scraped the Weather Underground Website's (https://www.wunderground.com)  hourly data of 28 private and public weather stations data. And analyzed to overview the weather effect on Green Taxi travel. My target was to match the latitude, and longitude of travel data with weather station data to get the closest weather station, then get the weather information from the weather station data depending on the date and time. Then work on visualization. 
 
 
