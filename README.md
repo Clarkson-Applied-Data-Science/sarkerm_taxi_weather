@@ -329,7 +329,7 @@ plot_line_graph(humidity_vs_tip_amount_x,humidity_vs_tip_amount_y,"humidity",'ti
 
 # Conclusion
 
-We can see the is a good effect of weather on taxi trips. Although data scraping for weather and preprocessing was time-consuming but the analyze show promising results.   I believe the process I have developed and  data I have collected, will help future data analysts in many ways while working on weather effect analysis.
+We can see there is a good effect of weather on taxi trips. Although data scraping for weather and preprocessing was time-consuming but the analyze show promising results.   I believe the process I have developed and  data I have collected, will help future data analysts in many ways while working on weather effect analysis.
 
 
 
