@@ -207,7 +207,7 @@ with open("processed_trip_data/green_taxi_processed_2015.csv", 'r',) as file:
 
 ### Data distribution
 
-At first, I wanted to see the data distributions. here I can see Cloudy weather is 25.4%, which is the highest. To make the visualization meaninful,I put the least significant distribution to the others category, which is a total of 7.4%. The dataset shows some bias which is the nature of the weather.
+At first, I wanted to see the data distributions. here I can see Mostly Cloudy weather is 25.4%, which is the highest. To make the visualization meaninful,I put the least significant distribution to the others category, which is a total of 7.4%. The dataset shows some bias which is the nature of the weather.
 
     
 ![png](analyze_files/analyze_5_0.png)
