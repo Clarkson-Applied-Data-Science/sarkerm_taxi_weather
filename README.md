@@ -115,7 +115,7 @@ humidity_vs_tip_amount = {}
 w_condition_count = {}
 
 
-with open("processed_trip_data/green_trip_data_2015_bkp.csv", 'r',) as file:
+with open("processed_trip_data/green_taxi_processed_2015.csv", 'r',) as file:
         reader = csv.DictReader(file, delimiter=',')
         for i,line in enumerate(reader):
             if i == 0:
@@ -207,7 +207,7 @@ with open("processed_trip_data/green_trip_data_2015_bkp.csv", 'r',) as file:
 At first, I wanted to see the data distributions. here I can see Cloudy weather is 23%, which is the highest. I put the least significant distribution to the others category, which is a total of 9%. The dataset shows some bias which is the nature of the weather.
 
     
-![png](visualization_files/visualization_5_0.png)
+![png](analyze_files/analyze_5_0.png)
     
 ### Weather condition vs (trip distance, fare, passenger count, tip)
 
@@ -221,19 +221,19 @@ plot_bar_chart(list(w_condition_vs_tip_amount.keys()) ,list(w_condition_vs_tip_a
 
 
     
-![png](visualization_files/visualization_6_0.png)
+![png](analyze_files/analyze_6_0.png)
     
 
 
 
     
-![png](visualization_files/visualization_6_1.png)
+![png](analyze_files/analyze_6_1.png)
     
 
 
 
     
-![png](visualization_files/visualization_6_2.png)
+![png](analyze_files/analyze_6_2.png)
     
 
 
@@ -244,7 +244,8 @@ plot_bar_chart(list(w_condition_vs_fare_rate.keys()) ,list(w_condition_vs_fare_r
 
 
     
-![png](visualization_files/visualization_7_0.png)
+![png](analyze_files/analyze_7_0.png)
+    
     
 
 
@@ -267,19 +268,19 @@ temperature_vs_tip_amount_y  = [x[1] for x in temperature_vs_tip_amount_sort]
 plot_line_graph(temperature_vs_tip_amount_x,temperature_vs_tip_amount_y,"temperature",'tip amount', 'Temperature vs tip amount')
 ```
     
-![png](visualization_files/visualization_8_0.png)
+![png](analyze_files/analyze_8_0.png)
     
 
 
 
     
-![png](visualization_files/visualization_8_1.png)
+![png](analyze_files/analyze_8_1.png)
     
 
 
 
     
-![png](visualization_files/visualization_8_2.png)
+![png](analyze_files/analyze_8_2.png)
     
 
 
@@ -304,22 +305,20 @@ plot_line_graph(humidity_vs_tip_amount_x,humidity_vs_tip_amount_y,"humidity",'ti
 
 ```
 
-
     
-![png](visualization_files/visualization_10_0.png)
-    
-
-
-
-    
-![png](visualization_files/visualization_10_1.png)
+![png](analyze_files/analyze_9_0.png)
     
 
 
 
     
-![png](visualization_files/visualization_10_2.png)
+![png](analyze_files/analyze_9_1.png)
     
+
+
+
+    
+![png](analyze_files/analyze_9_2.png)
 
 
 

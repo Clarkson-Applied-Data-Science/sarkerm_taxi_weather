@@ -5,4 +5,5 @@ station_data_original/*
 taxi_trip_raw_data/*
 log/*
 .vscode/*
+analyze.md
 ```
