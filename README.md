@@ -405,7 +405,7 @@ plot_line_graph(humidity_vs_tip_amount_x,humidity_vs_tip_amount_y,"humidity",'ti
     
 
 
-# Combined trend (average temperature, humidity and trip)
+# Combined trend (average temperature, humidity and trip distance)
 
 ![png](analyze_files/combine_trend.png)
 
