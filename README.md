@@ -95,6 +95,13 @@ For preprocessing taxi raw data. First compared latitude and longitude with stat
 I tried to minimize the analyze time so that most of the task is done on pre-processing statage. And tried to do all calculation in a single run. 
 
 ```python
+def get_key(key):
+    try:
+        return int(key)
+    except ValueError:
+        return key
+
+# weather conditions vs trip distance 
 w_condition_vs_trip_distance = {}
 w_condition_vs_passenger_count = {}
 w_condition_vs_tip_amount = {}
@@ -117,6 +124,10 @@ humidity_vs_tip_amount = {}
 
 w_condition_count = {}
 
+# Average humidity every month
+humidity_vs_month = {}
+temperature_vs_month = {}
+
 
 with open("processed_trip_data/green_taxi_processed_2015.csv", 'r',) as file:
         reader = csv.DictReader(file, delimiter=',')
@@ -131,8 +142,7 @@ with open("processed_trip_data/green_taxi_processed_2015.csv", 'r',) as file:
             trip_distance_x_passenger_count = (float(line['trip_distance']) * float(line['passenger_count']))
             if trip_distance_x_passenger_count != 0:
                 fare_rate = float(line['fare_amount']) / trip_distance_x_passenger_count
-            
-
+        
 
             if condition in w_condition_vs_trip_distance:
                 w_condition_vs_trip_distance[condition] += float(line['trip_distance'])
@@ -202,6 +212,35 @@ with open("processed_trip_data/green_taxi_processed_2015.csv", 'r',) as file:
             else:
                 w_condition_vs_fare_rate[condition] = fare_rate
 
+           
+            
+            d = datetime.strptime(line['pickup_datetime'], "%Y-%m-%d %H:%M:%S")
+            month = d.month
+
+            if month in humidity_vs_month:
+                humidity_vs_month[month] += float(line['humidity'])
+            else:
+                humidity_vs_month[month] = float(line['humidity'])  
+
+            if month in temperature_vs_month:
+                temperature_vs_month[month] += float(line['temperature'])
+            else:
+                temperature_vs_month[month] = float(line['temperature'])
+
+
+                
+
+#days in the month
+from calendar import monthrange
+for month in humidity_vs_month:
+    humidity_vs_month[month] = humidity_vs_month[month] / monthrange(2015, month)[1]
+
+for month in temperature_vs_month:
+    temperature_vs_month[month] = temperature_vs_month[month] / monthrange(2015, month)[1]
+    
+
+
+
 
 ```
 
@@ -255,6 +294,23 @@ plot_bar_chart(list(w_condition_vs_fare_rate.keys()) ,list(w_condition_vs_fare_r
 ### Effect of temperature on trip
 Analysis show that on 55-59(F) and 72-75(F) temperature people of New York use taxi more than other times.
 
+
+```python
+# Temperature vs over the year 2015
+import calendar
+temperature_vs_month_with_month_name = {}
+temperature_vs_month = dict(sorted(temperature_vs_month.items()))
+for key in temperature_vs_month:
+    temperature_vs_month_with_month_name[calendar.month_name[key]] = temperature_vs_month[key]
+
+plot_bar_chart(list(temperature_vs_month_with_month_name.keys()) ,list(temperature_vs_month_with_month_name.values()) ,"average temperature",'Month', 'Average Temperature in  Month of 2015')
+```
+
+
+    
+![png](analyze_files/analyze_8_0.png)
+
+
 ```python
 temperature_vs_trip_distance_sort = sorted(temperature_vs_trip_distance.items(), key=lambda t: get_key(t[0]))
 temperature_vs_trip_distance_x = [x[0] for x in temperature_vs_trip_distance_sort]
@@ -272,24 +328,45 @@ temperature_vs_tip_amount_y  = [x[1] for x in temperature_vs_tip_amount_sort]
 plot_line_graph(temperature_vs_tip_amount_x,temperature_vs_tip_amount_y,"temperature",'tip amount', 'Temperature vs tip amount')
 ```
     
-![png](analyze_files/analyze_8_0.png)
+    
+![png](analyze_files/analyze_9_0.png)
     
 
 
 
     
-![png](analyze_files/analyze_8_1.png)
+![png](analyze_files/analyze_9_1.png)
     
 
 
 
     
-![png](analyze_files/analyze_8_2.png)
+![png](analyze_files/analyze_9_2.png)
     
 
 
 ### Effect of humidity on trip
 The data shows that on humidity level 45%-70% people of New York use more green taxi then other times
+
+```python
+# Humidity vs over the year 2015 
+#convert month to month name
+# dict short by keys
+import calendar
+humidity_vs_month_with_month_name = {}
+humidity_vs_month = dict(sorted(humidity_vs_month.items()))
+for key in humidity_vs_month:
+    humidity_vs_month_with_month_name[calendar.month_name[key]] = humidity_vs_month[key]
+
+plot_bar_chart(list(humidity_vs_month_with_month_name.keys()) ,list(humidity_vs_month_with_month_name.values()) ,"average humidity",'Month', 'Average Humidity in  Month of 2015')
+```
+
+
+    
+![png](analyze_files/analyze_10_0.png)
+    
+
+
 
 ```python
 humidity_vs_trip_distance_short = sorted(humidity_vs_trip_distance.items(), key=lambda t: get_key(t[0]))
@@ -311,19 +388,21 @@ plot_line_graph(humidity_vs_tip_amount_x,humidity_vs_tip_amount_y,"humidity",'ti
 ```
 
     
-![png](analyze_files/analyze_9_0.png)
+    
+![png](analyze_files/analyze_11_0.png)
     
 
 
 
     
-![png](analyze_files/analyze_9_1.png)
+![png](analyze_files/analyze_11_1.png)
     
 
 
 
     
-![png](analyze_files/analyze_9_2.png)
+![png](analyze_files/analyze_11_2.png)
+    
 
 
 
